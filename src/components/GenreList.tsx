@@ -12,10 +12,10 @@ import getCroppedImageUrl from "../services/imgae-url";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
-  selectGenre: Genre | null;
+  selectGenreId?: number
 }
 
-const GenreList = ({ selectGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectGenreId, onSelectGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
 
   if (error) return null;
@@ -27,7 +27,7 @@ const GenreList = ({ selectGenre, onSelectGenre }: Props) => {
         Genre
       </Heading>
       <List>
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="10px">
             <HStack>
               <Image
@@ -38,7 +38,7 @@ const GenreList = ({ selectGenre, onSelectGenre }: Props) => {
               ></Image>
               <Button
                 fontSize="lg"
-                fontWeight={genre.id === selectGenre?.id ? "bold" : ""}
+                fontWeight={genre.id === selectGenreId ? "bold" : ""}
                 variant="link"
                 whiteSpace="normal"
                 textAlign="left"

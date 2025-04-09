@@ -1,11 +1,8 @@
-import useData from "./useData";
+import usePlatforms from "../hooks/usePlatforms";
 
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-const usePlatform = () => useData<Platform>("/platforms/lists/parents");
+const usePlatform = (id?: number) => {
+  const { data } = usePlatforms();
+  return data.results.find((platform) => platform.id === id);
+};
 
 export default usePlatform;
